@@ -80,7 +80,7 @@ Tùy vào mục đích sử dụng sẽ tạo các group khác nhau, ở đây m
 Thực hiện tạo các user và group khác tùy mục đích sử dụng của bạn
 
 
-## Pfsense m
+## Pfsense
 
 Đăng nhập vào tài khoản admin 
 
