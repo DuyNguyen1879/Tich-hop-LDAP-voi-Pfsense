@@ -10,7 +10,7 @@ Intergrate Pfsense with LDAP
 
 #### Tạo một cấu trúc như sau:
 
-anh 1
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh1.png)
 
 #### Tạo group 
 
@@ -18,36 +18,41 @@ Tùy vào mục đích sử dụng sẽ tạo các group khác nhau, ở đây m
 
 - Chọn `ou=group` -> `Create a child entry` -> `Generic: Posix Group`
 
-anh 2
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh2.png)
  
 - Nhập tên group là **pfsense_admin** và chọn `Create Object`
 
-anh 3
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh3.png)
 
 - Chọn commit
 
-anh 4
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh4.png)
 
 #### Tạo user
 
 - Chọn `ou=people` -> `Create a child entry` -> `Generic: User Account`
 
-anh 5
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh5.png)
 
 - Nhập các thông tin cần thiết sau đó chọn Creat Object
 
   **First name** : *huy* 
+  
   **Last name**  : *tran*
+  
   **Common Name**: *huytmcn*
+  
   **User ID**    : *huytmuid*
+  
   **Password**   :  *****
+  
   **GID Number** : *pfsense_admin*
   
-anh 6
+ ![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh6.png)
 
 - Chọn Commit
 
-anh 7
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh7.png)
 
 #### Mapping user với group 
 
@@ -55,19 +60,19 @@ anh 7
 
 - Chọn `cn=pfsense_admin` -> `Add new attribute`
 
-anh 8
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh8.png)
 
 - Chọn `memberUid`
 
-anh 9
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh9.png)
 
 - Nhập user vửa tạo Sau đó chọn Update Object
 
-anh10
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh10.png)
 
 - Chọn Update Object
 
-anh 11
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh11.png)
 
 
 > Lần sau muốn map user vào group pfsense_admin thì chỉ cần chọn (add value) và thêm user mong muốn.
@@ -83,55 +88,77 @@ Thực hiện tạo các user và group khác tùy mục đích sử dụng củ
 
 - Chọn `System` -> `User Manager`
 
-anh 12
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh12.png)
 
 - Chọn Authentication Server
 
-anh 13
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh13.png)
 
 - Chọn Add
 
-anh 14
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh14.png)
 
 - Nhập thông tin và chọn Save
 
   **Descriptive name**          : *LDAP-authen*
+  
   **Type**                      : *LDAP*
+  
   **Hostname or IP address**    : *10.10.12.193* (Địa chỉ IP LDAP server)
+  
   **Port value**                : *389*
+  
   **Transport**                 : *TCP - Standard*
+  
   **Peer Certificate Authority**: *Global Root CA List*
+  
   **Protocol version**          : *3*
+  
   **Server Timeout**            : *25*
+  
   **Search scope - Level**      : *Entire Subtree*
+  
   **Search scope - BaseDN**     : *Entire Subtree*
+  
   **Base DN**                   : *dc=nhanhoa,dc=local*
+  
   **Authentication containers** : *ou=people,dc=nhanhoa,dc=local*
+  
   **Extended query**            : *Uncheck*
+  
   **Bind anonymous**            : *UnCheck*
+  
   **Bind credentials**          : *cn=Manager,dc=nhanhoa,dc=local*  (Password *****)
+  
   **Initial Template**          : *OpenLDAP*
+  
   **User naming attribute**     : *cn*
+  
   **Group naming attribute**    : *cn*
+  
   **Group member attribute**    : *memberUid*
+  
   **RFC 2307 Groups**           : *Check*
+  
   **Group Object Class**        : *posixGroup*
+  
   **UTF8 Encode**               : *Uncheck*
+  
   **Username Alterations**      : *Uncheck*
   
   Chọn `Save`
   
-  anh 15
+  ![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh15.png)
   
 #### Thiết lập xác thực bằng LDAP
 
 - Chọn Settings -> Chọn Save & Test
 
-anh 18
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh18.png)
 
 - Kết quả 
 
-anh 19
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh19.png)
   
 #### Tạo group và phân quyền
 
@@ -139,35 +166,37 @@ Chú ý, Group mapping trong Pfsense phải trùng tên với group trong LDAP
 
 - Chọn Groups -> Chọn Add
 
-anh 16
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh16.png)
 
 - Nhập thông tin như sau:
   
   **Group name** : *pfsense_admin*
+  
   **Scope**      : *Remote*
+  
   **Description**: *Xác thực bằng LDAP*
   
   Chọn Save
   
-  anh 17
+  ![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh17.png)
   
 - Phân quyền cho Group pfsense_admin:
 
-anh 22
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh22.png)
 
 - Chọn Add 
 
-anh 23
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh23.png)
 
 - Chọn WebCfg- All pages -> Chọn Save -> Chọn Save tiếp 1 lần nữa 
 
-anh 24
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh24.png)
 
 #### Kiểm tra lại cấu hình 
 
 - Chọn `Diagnostics` -> `Authentication`
 
-anh 20
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh20.png)
 
 - Nhập thông tin như sau 
   
@@ -179,7 +208,7 @@ anh 20
   
 - Kết quả 
 
-anh 21
+![alt text](https://raw.githubusercontent.com/huytm/Tich-hop-LDAP-voi-Pfsense/master/images/anh21.png)
 
 ## Kiểm tra lại
 
